@@ -1,51 +1,18 @@
 @Entry
 @Component
 struct WidgetCard {
-  /*
-   * The title.
-   */
-  readonly title: string = 'Hello World';
-  /*
-   * The action type.
-   */
-  readonly actionType: string = 'router';
-  /*
-   * The ability name.
-   */
-  readonly abilityName: string = 'EntryAbility';
-  /*
-   * The message.
-   */
-  readonly message: string = 'add detail';
-  /*
-   * The width percentage setting.
-   */
-  readonly fullWidthPercent: string = '100%';
-  /*
-   * The height percentage setting.
-   */
-  readonly fullHeightPercent: string = '100%';
+  @State num: number = 0
 
   build() {
-    Row() {
-      Column() {
-        Text(this.title)
-          .fontSize($r('app.float.font_size'))
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font'))
+    Column() {
+      Counter() {
+        Text(this.num.toString())
       }
-      .width(this.fullWidthPercent)
+      .onInc(() => this.num++)
+      .onDec(() => this.num--)
     }
-    .height(this.fullHeightPercent)
-    .backgroundColor($r('sys.color.comp_background_primary'))
-    .onClick(() => {
-      postCardAction(this, {
-        action: this.actionType,
-        abilityName: this.abilityName,
-        params: {
-          message: this.message
-        }
-      });
-    })
+    .width('100%')
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
